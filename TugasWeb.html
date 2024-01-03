@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Data Mahasiswa</title>
+    <style>
+       .judul-dengan-garis {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .judul-dengan-garis::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 150%;
+            height: 3px; /* Ketebalan garis disesuaikan sesuai kebutuhan */
+            background-color: blueviolet; /* Warna garis disesuaikan sesuai kebutuhan */
+            padding-bottom: 0px;
+            border-bottom: 2px;
+        }
+        .container {
+            width: 20%; /* Sesuaikan lebar container dengan preferensi kamu */
+            margin: 0 auto; /* Membuat container rata tengah */
+            background-color: red; /* Warna latar belakang container */
+            padding: 20px; /* Ruang dalam container dari tepi ke kontennya */
+            margin-left: auto;
+            margin-right: auto;
+           
+        }
+
+        /* Styling tambahan untuk elemen di dalam container */
+        .container h2 {
+            color: white; /* Warna teks dalam container */
+        }
+
+        .container p {
+            color: black; /* Warna teks dalam container */
+        }
+        }
+
+/* Contoh gaya untuk elemen input dalam container */
+.container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+        /* Good */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    color: black;
+}
+
+/* Avoid */
+body{font-family: 'Arial', sans-serif;background-color: white;color: black;}
+
+/* Good */
+.form-container {
+    margin: 20px;
+    padding: 10px;
+}
+
+/* Avoid */
+.fc {
+    margin: 20px;
+    padding: 10px;
+}
+.menu{
+      text-align: center;
+      background-color: darkviolet;
+      color: whitesmoke;
+      font-size: 22px;
+      padding-top: 18pt;
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+<h2 class="judul-dengan-garis">INPUT DATA</h2>
+
+<form id="mahasiswaForm">
+    <p>
+        <label for="npm">NPM:</label>
+    </p>
+    <p>
+       <input type="text" id="npm" name="npm" required>  
+    </p>
+    <p>
+        <label for="nama">Nama:</label>
+    </p>
+    <p>
+       <input type="text" id="nama" name="nama" required>  
+    </p>
+    <p>
+        <label for="nilai">Nilai:</label>
+    </p>
+    <p>
+        <input type="number" id="nilai" name="nilai" required>
+    </p>
+    <br>
+    <button type="button" onclick="prosesData()">Proses</button>
+    <button type="button" onclick="resetForm()">Reset</button>
+    <br>
+</form>
+</div>
+
+<h2 align="center">Hasil</h2>
+<p id="hasil" align="center"></p>
+
+<script>
+    function Mahasiswa(npm, nama, nilai) {
+        this.npm = npm;
+        this.nama = nama;
+        this.nilai = nilai;
+        this.grade = '';
+        this.status = '';
+    }
+
+    Mahasiswa.prototype.prosesNilai = function() {
+        if (this.nilai >= 80) {
+            this.grade = 'A';
+            this.status = 'Lulus';
+        } else if (this.nilai >= 70) {
+            this.grade = 'B';
+            this.status = 'Lulus';
+        } else if (this.nilai >= 60) {
+            this.grade = 'C';
+            this.status = 'Lulus';
+        } else {
+            this.grade = 'D';
+            this.status = 'Tidak Lulus';
+        }
+    };
+
+    function prosesData() {
+        var npm = document.getElementById('npm').value;
+        var nama = document.getElementById('nama').value;
+        var nilai = parseFloat(document.getElementById('nilai').value);
+
+        var mahasiswa = new Mahasiswa(npm, nama, nilai);
+        mahasiswa.prosesNilai();
+
+        var hasilText = "NPM: " + mahasiswa.npm +
+                        "<br>Nama: " + mahasiswa.nama +
+                        "<br>Nilai: " + mahasiswa.nilai +
+                        "<br>Grade: " + mahasiswa.grade +
+                        "<br>Status: " + mahasiswa.status;
+
+        document.getElementById('hasil').innerHTML = hasilText;
+    }
+
+    function resetForm() {
+        document.getElementById('mahasiswaForm').reset();
+        document.getElementById('hasil').innerHTML = "";
+    }
+</script>
+
+</body>
+</html>
